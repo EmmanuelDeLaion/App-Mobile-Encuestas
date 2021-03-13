@@ -1,4 +1,5 @@
 import 'package:encuestas/constants.dart';
+import 'package:encuestas/screens/home/home_screen.dart';
 import 'package:encuestas/screens/login/components/background.dart';
 import 'package:flutter/material.dart';
 
@@ -61,7 +62,12 @@ class Body extends StatelessWidget {
               child: FlatButton(
                   padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
                   color: colorPrimary,
-                  onLongPress: () {},
+                   onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return HomeScreen();
+                    }));
+                  },
                   child: Text(
                     "Iniciar Sesión",
                     style: TextStyle(
