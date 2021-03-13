@@ -1,21 +1,11 @@
+import 'package:encuestas/screens/login/components/body.dart';
 import 'package:flutter/material.dart';
- 
- 
-class MyApp extends StatelessWidget {
+
+class LoginScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Material App Bar'),
-        ),
-        body: Center(
-          child: Container(
-            child: Text('Hello World'),
-          ),
-        ),
-      ),
+  Widget build(BuildContext context){
+    return Scaffold(
+      body: Body(),
     );
   }
 }
