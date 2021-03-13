@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'App Encuestas',
       theme: ThemeData(
-        primaryColor: kPrimaryColor,
+        primaryColor: colorPrimary,
         scaffoldBackgroundColor: Colors.white,
       ),
        home: WelcomeScreen(),

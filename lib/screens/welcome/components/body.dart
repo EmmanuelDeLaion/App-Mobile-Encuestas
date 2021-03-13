@@ -14,15 +14,11 @@ class Body extends StatelessWidget {
           Text(
             "¡Hola!",
             style: TextStyle(
-              color: kPrimaryColor,
+              color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 20,
             ),
           ),
-          Image.asset(
-            "assets/icons/chat.svg",
-          ),
-           
         ],
       ),
     );

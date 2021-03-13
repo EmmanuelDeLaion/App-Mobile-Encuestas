@@ -1,3 +1,4 @@
+import 'package:encuestas/constants.dart';
 import 'package:flutter/material.dart';
 
 class Background extends StatelessWidget {
@@ -11,6 +12,7 @@ class Background extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
+      color: colorPrimary,
       height: size.height,
       width: double.infinity,
       child: Stack(
@@ -18,18 +20,42 @@ class Background extends StatelessWidget {
         children: <Widget>[
           Positioned(
             top: 0,
-            left: 0,
+            right: 0,
             child: Image.asset(
-              "assets/images/main_top.png",
+              "assets/images/puntos.png",
               width: size.width * 0.3,
             ),
           ),
           Positioned(
-            left: 0,
-            bottom: 0,
+            bottom: -50,
+            right: -50,
             child: Image.asset(
-              "assets/images/main_bottom.png",
+              "assets/images/encuestass.png",
+              width: size.width * 0.7,
+            ),
+          ),
+          Positioned(
+            top: 70,
+            left: -20,
+            child: Image.asset(
+              "assets/images/circulo1.png",
               width: size.width * 0.2,
+            ),
+          ),
+          Positioned(
+            top: 400,
+            right: -20,
+            child: Image.asset(
+              "assets/images/circulo2.png",
+              width: size.width * 0.2,
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            child: Image.asset(
+              "assets/images/puntos.png",
+              width: size.width * 0.3,
             ),
           ),
           child
