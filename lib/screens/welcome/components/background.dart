@@ -51,8 +51,8 @@ class Background extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 0,
-            left: 0,
+            bottom: -10,
+            left: -10,
             child: Image.asset(
               "assets/images/puntos.png",
               width: size.width * 0.3,
