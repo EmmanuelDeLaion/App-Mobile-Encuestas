@@ -1,5 +1,5 @@
 import 'package:encuestas/constants.dart';
-import 'package:encuestas/screens/encuestas/encuestas.dart';
+import 'package:encuestas/screens/encuestas/encuestaInfoGeneral.dart';
 import 'package:encuestas/screens/home/home_screen.dart';
 import 'package:encuestas/screens/login/components/background.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +67,7 @@ class Body extends StatelessWidget {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       // return HomeScreen();
-                      return EncuestaScreen();
+                      return HomeScreen();
                     }));
                   },
                   child: Text(

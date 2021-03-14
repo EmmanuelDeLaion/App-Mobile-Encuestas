@@ -1,5 +1,8 @@
 import 'package:encuestas/constants.dart';
-import 'package:encuestas/screens/encuestas/encuestas.dart';
+import 'package:encuestas/screens/encuestas/encuestaEstudioSocioeconomico.dart';
+import 'package:encuestas/screens/encuestas/encuestaFichaIdentificacion.dart';
+import 'package:encuestas/screens/encuestas/encuestaFormatoEntrevista.dart';
+import 'package:encuestas/screens/encuestas/encuestaInfoGeneral.dart';
 import 'package:flutter/material.dart';
 import 'header.dart';
 
@@ -10,60 +13,33 @@ class Body extends StatelessWidget {
     return SingleChildScrollView(
         child: Column(children: <Widget>[
       HeaderSearchTitle(size: size),
-      botonSecciones(
-        titulo: "Información General",
-        descripcion: "Contiene 10 preguntas",
-        path: "assets/images/imgencuesta1.png",
-        press: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return EncuestaScreen();
-          }));
-        },
-      ),
+      BotonInfoGeneral(),
       SizedBox(
         height: 10,
       ),
-      botonSecciones(
-        titulo: "Información Socioeconómica",
-        descripcion: "Contiene 20 preguntas",
-        path: "assets/images/imgencuesta1.png",
-        press: () {},
-      ),
+      BotonEstudioSocioeconomico(),
       SizedBox(
         height: 10,
       ),
-      botonSecciones(
-        titulo: "Ficha de identificación",
-        descripcion: "Contiene 10 preguntas",
-        path: "assets/images/imgencuesta1.png",
-        press: () {},
-      ),
+      BotonFichaIdentificacion(),
       SizedBox(
         height: 10,
       ),
-      botonSecciones(
-        titulo: "Formato de entrevista",
-        descripcion: "Contiene 10 preguntas",
-        path: "assets/images/imgencuesta1.png",
-        press: () {},
-      ),
+      BotonFormatoEntrevista(),
     ]));
   }
 }
 
-class botonSecciones extends StatelessWidget {
-  final String titulo;
-  final String descripcion;
-  final String path;
-  final Function press;
-  const botonSecciones(
-      {Key key, this.titulo, this.descripcion, this.path, this.press})
-      : super(key: key);
-
+class BotonInfoGeneral extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return FlatButton(
+      onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return EncuestaInformacionGeneralScreen();
+        }));
+      },
       child: Column(
         children: <Widget>[
           Container(
@@ -84,18 +60,177 @@ class botonSecciones extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Column(children: <Widget>[
-                  Text("$titulo",
+                  Text("Información general",
                       style: TextStyle(
                           fontSize: 16,
                           color: colorPrimary,
                           fontWeight: FontWeight.bold)),
                   Text(
-                    "$descripcion",
+                    "Contiene 10 preguntas",
                     style: TextStyle(fontSize: 10, color: Colors.black54),
                   )
                 ]),
                 Image.asset(
-                  "$path",
+                  "assets/images/imgencuesta1.png",
+                  width: size.width * 0.1,
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BotonEstudioSocioeconomico extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return FlatButton(
+      onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return EncuestaEstudioSocioeconomicoScreen();
+        }));
+      },
+      child: Column(
+        children: <Widget>[
+          Container(
+            width: size.width * 0.8,
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: colorPrimary),
+              borderRadius: BorderRadius.circular(5),
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(5, 5),
+                  color: colorPrimary.withOpacity(1),
+                )
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(children: <Widget>[
+                  Text("Estudio Socioeconomico",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: colorPrimary,
+                          fontWeight: FontWeight.bold)),
+                  Text(
+                    "Contiene 20 preguntas",
+                    style: TextStyle(fontSize: 10, color: Colors.black54),
+                  )
+                ]),
+                Image.asset(
+                  "assets/images/imgencuesta1.png",
+                  width: size.width * 0.1,
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BotonFichaIdentificacion extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return FlatButton(
+      onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return EncuestaFichaIdentificacion();
+        }));
+      },
+      child: Column(
+        children: <Widget>[
+          Container(
+            width: size.width * 0.8,
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: colorPrimary),
+              borderRadius: BorderRadius.circular(5),
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(5, 5),
+                  color: colorPrimary.withOpacity(1),
+                )
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(children: <Widget>[
+                  Text("Ficha de identificación",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: colorPrimary,
+                          fontWeight: FontWeight.bold)),
+                  Text(
+                    "Contiene 15 preguntas",
+                    style: TextStyle(fontSize: 10, color: Colors.black54),
+                  )
+                ]),
+                Image.asset(
+                  "assets/images/imgencuesta1.png",
+                  width: size.width * 0.1,
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BotonFormatoEntrevista extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return FlatButton(
+      onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return EncuestaFormatoEntrevista();
+        }));
+      },
+      child: Column(
+        children: <Widget>[
+          Container(
+            width: size.width * 0.8,
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: colorPrimary),
+              borderRadius: BorderRadius.circular(5),
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(5, 5),
+                  color: colorPrimary.withOpacity(1),
+                )
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(children: <Widget>[
+                  Text("Formato de entrevista",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: colorPrimary,
+                          fontWeight: FontWeight.bold)),
+                  Text(
+                    "Contiene 30 preguntas",
+                    style: TextStyle(fontSize: 10, color: Colors.black54),
+                  )
+                ]),
+                Image.asset(
+                  "assets/images/imgencuesta1.png",
                   width: size.width * 0.1,
                 )
               ],

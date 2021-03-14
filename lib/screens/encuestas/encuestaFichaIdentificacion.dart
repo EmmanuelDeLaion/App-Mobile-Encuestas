@@ -1,12 +1,14 @@
 import 'package:encuestas/constants.dart';
 import 'package:flutter/material.dart';
 
-class EncuestaScreen extends StatefulWidget {
+class EncuestaFichaIdentificacion extends StatefulWidget {
   @override
-  _EncuestaScreenState createState() => _EncuestaScreenState();
+  _EncuestaFichaIdentificacionState createState() =>
+      _EncuestaFichaIdentificacionState();
 }
 
-class _EncuestaScreenState extends State<EncuestaScreen> {
+class _EncuestaFichaIdentificacionState
+    extends State<EncuestaFichaIdentificacion> {
   GlobalKey<FormState> keyForm = new GlobalKey();
   TextEditingController nameCtrl = new TextEditingController();
   TextEditingController emailCtrl = new TextEditingController();
@@ -20,11 +22,21 @@ class _EncuestaScreenState extends State<EncuestaScreen> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: colorPrimary,
-          title: Text("Información general",
-          style: TextStyle(
-            fontSize: 14,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
+          backgroundColor: colorPrimary,
+          title: Text(
+            "Ficha de identificación",
+            style: TextStyle(
+              fontSize: 14,
+            ),
           ),
         ),
         body: SingleChildScrollView(
@@ -135,10 +147,9 @@ class _EncuestaScreenState extends State<EncuestaScreen> {
               margin: new EdgeInsets.all(30.0),
               alignment: Alignment.center,
               decoration: ShapeDecoration(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0)),
-                color: colorPrimary
-              ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0)),
+                  color: colorPrimary),
               child: Text("Guardar",
                   style: TextStyle(
                       color: Colors.white,
