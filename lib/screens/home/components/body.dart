@@ -1,6 +1,5 @@
-import 'dart:html';
-
 import 'package:encuestas/constants.dart';
+import 'package:encuestas/screens/encuestas/encuestas.dart';
 import 'package:flutter/material.dart';
 import 'header.dart';
 
@@ -15,7 +14,11 @@ class Body extends StatelessWidget {
         titulo: "Información General",
         descripcion: "Contiene 10 preguntas",
         path: "assets/images/imgencuesta1.png",
-        press: () {},
+        press: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return EncuestaScreen();
+          }));
+        },
       ),
       SizedBox(
         height: 10,
@@ -68,14 +71,12 @@ class botonSecciones extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             decoration: BoxDecoration(
               color: Colors.white,
-              border: Border.all(
-                color: colorPrimary
-              ),
+              border: Border.all(color: colorPrimary),
               borderRadius: BorderRadius.circular(5),
               boxShadow: [
                 BoxShadow(
-                  offset: Offset(5,5),
-                   color: colorPrimary.withOpacity(1),
+                  offset: Offset(5, 5),
+                  color: colorPrimary.withOpacity(1),
                 )
               ],
             ),
