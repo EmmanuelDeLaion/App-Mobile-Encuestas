@@ -16,6 +16,36 @@ class _EncuestaFichaIdentificacionState
   TextEditingController passwordCtrl = new TextEditingController();
   TextEditingController repeatPassCtrl = new TextEditingController();
 
+  // Campos encuestas
+  TextEditingController nombre = new TextEditingController();
+  TextEditingController numeroControl = new TextEditingController();
+  TextEditingController nombreTutor = new TextEditingController();
+  TextEditingController estatura = new TextEditingController();
+  TextEditingController peso = new TextEditingController();
+  TextEditingController edad = new TextEditingController();
+  TextEditingController sexo = new TextEditingController();
+  TextEditingController fechaNac = new TextEditingController();
+  TextEditingController lugarNac = new TextEditingController();
+  TextEditingController telefono = new TextEditingController();
+  TextEditingController correo = new TextEditingController();
+  TextEditingController facebook = new TextEditingController();
+  TextEditingController direccion = new TextEditingController();
+  TextEditingController estadoCivil = new TextEditingController();
+  TextEditingController institucionP = new TextEditingController();
+  TextEditingController especialidad = new TextEditingController();
+  TextEditingController promedio = new TextEditingController();
+  TextEditingController ceneval = new TextEditingController();
+  TextEditingController cursoP = new TextEditingController();
+  TextEditingController becado = new TextEditingController();
+  TextEditingController especifique = new TextEditingController();
+  TextEditingController direccionActual = new TextEditingController();
+  TextEditingController nombreEmpresa = new TextEditingController();
+  TextEditingController horario = new TextEditingController();
+  TextEditingController direccionTrabajo = new TextEditingController();
+  TextEditingController nombreCasoAccidente = new TextEditingController();
+  TextEditingController telefonoCasoAccidente = new TextEditingController();
+  TextEditingController observaciones = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,9 +64,7 @@ class _EncuestaFichaIdentificacionState
           backgroundColor: colorPrimary,
           title: Text(
             "Ficha de identificación",
-            style: TextStyle(
-              fontSize: 14,
-            ),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
         ),
         body: SingleChildScrollView(
@@ -59,7 +87,13 @@ class _EncuestaFichaIdentificacionState
     );
   }
 
-  String gender = 'hombre';
+  String genero = 'hombre';
+  String estado = 'Soltero';
+  String estadoBecado = 'Si';
+  String procedenciaBeca = 'Gobierno Federal';
+  String estanciaEstudios = 'Con mi familia';
+  String estadoTrabajo = 'Si';
+  String estudiosEscolaresTutores = 'Prim';
 
   Widget formUI() {
     return Column(
@@ -67,46 +101,132 @@ class _EncuestaFichaIdentificacionState
         formItemsDesign(
             Icons.person,
             TextFormField(
-              controller: nameCtrl,
+              controller: nombre,
               decoration: new InputDecoration(
                 labelText: 'Nombre',
               ),
               validator: validateName,
             )),
         formItemsDesign(
-            Icons.phone,
+            Icons.person,
             TextFormField(
-              controller: mobileCtrl,
+              controller: nombreTutor,
               decoration: new InputDecoration(
-                labelText: 'Numero de telefono',
+                labelText: 'Nombre del tutor',
               ),
-              keyboardType: TextInputType.phone,
-              maxLength: 10,
-              validator: validateMobile,
+              validator: validateName,
+            )),
+        formItemsDesign(
+            Icons.check_box,
+            TextFormField(
+              controller: numeroControl,
+              decoration: InputDecoration(
+                labelText: 'Número de control',
+              ),
+              validator: validateName,
             )),
         formItemsDesign(
             null,
             Column(children: <Widget>[
-              Text("Genero"),
+              Text("Sexo"),
               RadioListTile<String>(
                 title: const Text('Hombre'),
                 value: 'hombre',
-                groupValue: gender,
+                groupValue: genero,
                 onChanged: (value) {
                   setState(() {
-                    gender = value;
+                    genero = value;
                   });
                 },
               ),
               RadioListTile<String>(
                 title: const Text('Mujer'),
                 value: 'mujer',
-                groupValue: gender,
+                groupValue: genero,
                 onChanged: (value) {
                   setState(() {
-                    gender = value;
+                    genero = value;
                   });
                 },
+              )
+            ])),
+        formItemsDesign(
+            Icons.local_movies,
+            TextFormField(
+              controller: estatura,
+              decoration: InputDecoration(
+                labelText: 'Estatura',
+              ),
+              validator: validateName,
+            )),
+        formItemsDesign(
+            Icons.local_convenience_store_outlined,
+            TextFormField(
+              controller: peso,
+              decoration: InputDecoration(
+                labelText: 'Peso',
+              ),
+              validator: validateName,
+            )),
+        formItemsDesign(
+            Icons.home_filled,
+            TextFormField(
+              controller: lugarNac,
+              decoration: InputDecoration(
+                labelText: 'Lugar de nacimiento',
+              ),
+              validator: validateName,
+            )),
+        formItemsDesign(
+            Icons.home_filled,
+            TextFormField(
+              controller: direccion,
+              decoration: InputDecoration(
+                labelText: 'Dirección de procedencia',
+              ),
+              validator: validateName,
+            )),
+
+        formItemsDesign(
+            null,
+            Column(children: <Widget>[
+              Text("Estado civil"),
+              RadioListTile<String>(
+                title: const Text('Soltero'),
+                value: 'soltero',
+                groupValue: estado,
+                onChanged: (value) {
+                  setState(() {
+                    estado = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Casado'),
+                value: 'casado',
+                groupValue: estado,
+                onChanged: (value) {
+                  setState(() {
+                    estado = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Otro'),
+                value: 'otro',
+                groupValue: estado,
+                onChanged: (value) {
+                  setState(() {
+                    estado = value;
+                  });
+                },
+              ),
+              TextFormField(
+                controller: especifique,
+                decoration: InputDecoration(
+                  labelText: 'Especifique',
+                ),
+                validator: validateName,
               )
             ])),
         formItemsDesign(
@@ -114,31 +234,231 @@ class _EncuestaFichaIdentificacionState
             TextFormField(
               controller: emailCtrl,
               decoration: new InputDecoration(
-                labelText: 'Email',
+                labelText: 'Correo',
               ),
               keyboardType: TextInputType.emailAddress,
               maxLength: 32,
               validator: validateEmail,
             )),
         formItemsDesign(
-            Icons.remove_red_eye,
+            Icons.home_filled,
             TextFormField(
-              controller: passwordCtrl,
-              obscureText: true,
+              controller: institucionP,
               decoration: InputDecoration(
-                labelText: 'Contraseña',
+                labelText: 'Institución de procedencia',
               ),
+              validator: validateName,
             )),
         formItemsDesign(
-            Icons.remove_red_eye,
+            Icons.home_filled,
             TextFormField(
-              controller: repeatPassCtrl,
-              obscureText: true,
+              controller: especialidad,
               decoration: InputDecoration(
-                labelText: 'Repetir la Contraseña',
+                labelText: 'Especialidad',
               ),
-              validator: validatePassword,
+              validator: validateName,
             )),
+
+        formItemsDesign(
+            Icons.av_timer_sharp,
+            TextFormField(
+              controller: promedio,
+              decoration: InputDecoration(
+                labelText: 'Promedio',
+              ),
+              validator: validateName,
+            )),
+
+        formItemsDesign(
+            Icons.home_filled,
+            TextFormField(
+              controller: ceneval,
+              decoration: InputDecoration(
+                labelText: 'Ceneval',
+              ),
+              validator: validateName,
+            )),
+
+        formItemsDesign(
+            Icons.golf_course,
+            TextFormField(
+              controller: cursoP,
+              decoration: InputDecoration(
+                labelText: 'Curso Propedeutico',
+              ),
+              validator: validateName,
+            )),
+        formItemsDesign(
+            null,
+            Column(children: <Widget>[
+              Text("¿Has estado becado?"),
+              RadioListTile<String>(
+                title: const Text('Si'),
+                value: 'si',
+                groupValue: estadoBecado,
+                onChanged: (value) {
+                  setState(() {
+                    estadoBecado = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('No'),
+                value: 'no',
+                groupValue: estadoBecado,
+                onChanged: (value) {
+                  setState(() {
+                    estadoBecado = value;
+                  });
+                },
+              )
+            ])),
+        formItemsDesign(
+            null,
+            Column(children: <Widget>[
+              Text("¿De donde proviene la beca?"),
+              RadioListTile<String>(
+                title: const Text('Gobierno Federal'),
+                value: 'gobiernofederal',
+                groupValue: procedenciaBeca,
+                onChanged: (value) {
+                  setState(() {
+                    procedenciaBeca = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Gobierno Estatal'),
+                value: 'gobiernoestatal',
+                groupValue: procedenciaBeca,
+                onChanged: (value) {
+                  setState(() {
+                    procedenciaBeca = value;
+                  });
+                },
+              )
+            ])),
+
+        formItemsDesign(
+            null,
+            Column(children: <Widget>[
+              Text("En el transcurso de tus estudios vivirás:"),
+              RadioListTile<String>(
+                title: const Text('Con mi familia'),
+                value: 'conmifamilia',
+                groupValue: estanciaEstudios,
+                onChanged: (value) {
+                  setState(() {
+                    estanciaEstudios = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Con familiares cercanos'),
+                value: 'familiarescercanos',
+                groupValue: estanciaEstudios,
+                onChanged: (value) {
+                  setState(() {
+                    estanciaEstudios = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Con otros estudiantes'),
+                value: 'conotrosestudiantes',
+                groupValue: estanciaEstudios,
+                onChanged: (value) {
+                  setState(() {
+                    estanciaEstudios = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Solo'),
+                value: 'solo',
+                groupValue: estanciaEstudios,
+                onChanged: (value) {
+                  setState(() {
+                    estanciaEstudios = value;
+                  });
+                },
+              )
+            ])),
+        formItemsDesign(
+            Icons.home_filled,
+            TextFormField(
+              controller: direccion,
+              decoration: InputDecoration(
+                labelText: 'Dirección actual',
+              ),
+              validator: validateName,
+            )),
+        formItemsDesign(
+            null,
+            Column(children: <Widget>[
+              Text("¿Trabajas?"),
+              RadioListTile<String>(
+                title: const Text('Si'),
+                value: 'si',
+                groupValue: estadoTrabajo,
+                onChanged: (value) {
+                  setState(() {
+                    estadoTrabajo = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('No'),
+                value: 'no',
+                groupValue: estadoTrabajo,
+                onChanged: (value) {
+                  setState(() {
+                    estadoTrabajo = value;
+                  });
+                },
+              )
+            ])),
+        formItemsDesign(
+            Icons.home_filled,
+            TextFormField(
+              controller: nombreEmpresa,
+              decoration: InputDecoration(
+                labelText: 'Nombre de la empresa',
+              ),
+              validator: validateName,
+            )),
+        formItemsDesign(
+            Icons.home_filled,
+            TextFormField(
+              controller: horario,
+              decoration: InputDecoration(
+                labelText: 'Horario',
+              ),
+              validator: validateName,
+            )),
+            Text(
+              "Maximo grado de estudios escolares:"
+            ),
+
+        // formItemsDesign(
+        //     Icons.remove_red_eye,
+        //     TextFormField(
+        //       controller: passwordCtrl,
+        //       obscureText: true,
+        //       decoration: InputDecoration(
+        //         labelText: 'Contraseña',
+        //       ),
+        //     )),
+        // formItemsDesign(
+        //     Icons.remove_red_eye,
+        //     TextFormField(
+        //       controller: repeatPassCtrl,
+        //       obscureText: true,
+        //       decoration: InputDecoration(
+        //         labelText: 'Repetir la Contraseña',
+        //       ),
+        //       validator: validatePassword,
+        //     )),
         GestureDetector(
             onTap: () {
               save();
