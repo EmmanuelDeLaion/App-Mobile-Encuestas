@@ -41,7 +41,8 @@ class _EncuestaFichaIdentificacionState
   TextEditingController direccionActual = new TextEditingController();
   TextEditingController nombreEmpresa = new TextEditingController();
   TextEditingController horario = new TextEditingController();
-  TextEditingController direccionTrabajo = new TextEditingController();
+  TextEditingController direccionTrabajoPadre = new TextEditingController();
+  TextEditingController direccionTrabajoMadre = new TextEditingController();
   TextEditingController nombreCasoAccidente = new TextEditingController();
   TextEditingController telefonoCasoAccidente = new TextEditingController();
   TextEditingController observaciones = new TextEditingController();
@@ -63,7 +64,7 @@ class _EncuestaFichaIdentificacionState
           ),
           backgroundColor: colorPrimary,
           title: Text(
-            "Ficha de identificación",
+            "Encuesta",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
         ),
@@ -72,7 +73,7 @@ class _EncuestaFichaIdentificacionState
             margin: EdgeInsets.all(60.0),
             child: Form(
               key: keyForm,
-              child: formUI(),
+              child: formUI(context),
             ),
           ),
         ),
@@ -94,10 +95,24 @@ class _EncuestaFichaIdentificacionState
   String estanciaEstudios = 'Con mi familia';
   String estadoTrabajo = 'Si';
   String estudiosEscolaresTutores = 'Prim';
+  String estudiosEscolaresTutoresMadre = 'Prim';
+  String estadoTutorPadre = 'Vive';
+  String estadoTutorMadre = 'Vive';
 
-  Widget formUI() {
+  Widget formUI(context) {
+    Size size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
+        Text(
+          "Ficha de identificación",
+          style: TextStyle(
+              fontSize: 30, fontWeight: FontWeight.bold, color: colorPrimary),
+        ),
+        Container(
+          height: size.height * 0.4,
+          child: Image.asset("assets/images/img-login.png"),
+        ),
+
         formItemsDesign(
             Icons.person,
             TextFormField(
@@ -123,7 +138,6 @@ class _EncuestaFichaIdentificacionState
               decoration: InputDecoration(
                 labelText: 'Número de control',
               ),
-              validator: validateName,
             )),
         formItemsDesign(
             null,
@@ -157,7 +171,6 @@ class _EncuestaFichaIdentificacionState
               decoration: InputDecoration(
                 labelText: 'Estatura',
               ),
-              validator: validateName,
             )),
         formItemsDesign(
             Icons.local_convenience_store_outlined,
@@ -166,7 +179,6 @@ class _EncuestaFichaIdentificacionState
               decoration: InputDecoration(
                 labelText: 'Peso',
               ),
-              validator: validateName,
             )),
         formItemsDesign(
             Icons.home_filled,
@@ -175,16 +187,14 @@ class _EncuestaFichaIdentificacionState
               decoration: InputDecoration(
                 labelText: 'Lugar de nacimiento',
               ),
-              validator: validateName,
             )),
         formItemsDesign(
-            Icons.home_filled,
+            Icons.location_history,
             TextFormField(
               controller: direccion,
               decoration: InputDecoration(
                 labelText: 'Dirección de procedencia',
               ),
-              validator: validateName,
             )),
 
         formItemsDesign(
@@ -226,7 +236,6 @@ class _EncuestaFichaIdentificacionState
                 decoration: InputDecoration(
                   labelText: 'Especifique',
                 ),
-                validator: validateName,
               )
             ])),
         formItemsDesign(
@@ -241,13 +250,20 @@ class _EncuestaFichaIdentificacionState
               validator: validateEmail,
             )),
         formItemsDesign(
+            Icons.check_box,
+            TextFormField(
+              controller: facebook,
+              decoration: InputDecoration(
+                labelText: 'Facebook',
+              ),
+            )),
+        formItemsDesign(
             Icons.home_filled,
             TextFormField(
               controller: institucionP,
               decoration: InputDecoration(
                 labelText: 'Institución de procedencia',
               ),
-              validator: validateName,
             )),
         formItemsDesign(
             Icons.home_filled,
@@ -256,7 +272,6 @@ class _EncuestaFichaIdentificacionState
               decoration: InputDecoration(
                 labelText: 'Especialidad',
               ),
-              validator: validateName,
             )),
 
         formItemsDesign(
@@ -266,17 +281,15 @@ class _EncuestaFichaIdentificacionState
               decoration: InputDecoration(
                 labelText: 'Promedio',
               ),
-              validator: validateName,
             )),
 
         formItemsDesign(
-            Icons.home_filled,
+            Icons.public,
             TextFormField(
               controller: ceneval,
               decoration: InputDecoration(
                 labelText: 'Ceneval',
               ),
-              validator: validateName,
             )),
 
         formItemsDesign(
@@ -286,7 +299,6 @@ class _EncuestaFichaIdentificacionState
               decoration: InputDecoration(
                 labelText: 'Curso Propedeutico',
               ),
-              validator: validateName,
             )),
         formItemsDesign(
             null,
@@ -385,13 +397,12 @@ class _EncuestaFichaIdentificacionState
               )
             ])),
         formItemsDesign(
-            Icons.home_filled,
+            Icons.location_city,
             TextFormField(
-              controller: direccion,
+              controller: direccionActual,
               decoration: InputDecoration(
                 labelText: 'Dirección actual',
               ),
-              validator: validateName,
             )),
         formItemsDesign(
             null,
@@ -425,40 +436,243 @@ class _EncuestaFichaIdentificacionState
               decoration: InputDecoration(
                 labelText: 'Nombre de la empresa',
               ),
-              validator: validateName,
             )),
         formItemsDesign(
-            Icons.home_filled,
+            Icons.schedule,
             TextFormField(
               controller: horario,
               decoration: InputDecoration(
                 labelText: 'Horario',
               ),
+            )),
+        Text("Maximo grado de estudios escolares:"),
+        formItemsDesign(
+            null,
+            Column(children: <Widget>[
+              Text("Padre"),
+              RadioListTile<String>(
+                title: const Text('Primaria'),
+                value: 'primaria',
+                groupValue: estudiosEscolaresTutores,
+                onChanged: (value) {
+                  setState(() {
+                    estudiosEscolaresTutores = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Secundaria'),
+                value: 'secundaria',
+                groupValue: estudiosEscolaresTutores,
+                onChanged: (value) {
+                  setState(() {
+                    estudiosEscolaresTutores = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Bachillerato'),
+                value: 'bachillerato',
+                groupValue: estudiosEscolaresTutores,
+                onChanged: (value) {
+                  setState(() {
+                    estudiosEscolaresTutores = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Licenciatura'),
+                value: 'licenciatura',
+                groupValue: estudiosEscolaresTutores,
+                onChanged: (value) {
+                  setState(() {
+                    estudiosEscolaresTutores = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Postgrado'),
+                value: 'postgrado',
+                groupValue: estudiosEscolaresTutores,
+                onChanged: (value) {
+                  setState(() {
+                    estudiosEscolaresTutores = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Sin estudios'),
+                value: 'sinestudios',
+                groupValue: estudiosEscolaresTutores,
+                onChanged: (value) {
+                  setState(() {
+                    estudiosEscolaresTutores = value;
+                  });
+                },
+              ),
+            ])),
+        formItemsDesign(
+            null,
+            Column(children: <Widget>[
+              Text("Madre"),
+              RadioListTile<String>(
+                title: const Text('Primaria'),
+                value: 'primaria',
+                groupValue: estudiosEscolaresTutoresMadre,
+                onChanged: (value) {
+                  setState(() {
+                    estudiosEscolaresTutoresMadre = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Secundaria'),
+                value: 'secundaria',
+                groupValue: estudiosEscolaresTutoresMadre,
+                onChanged: (value) {
+                  setState(() {
+                    estudiosEscolaresTutoresMadre = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Bachillerato'),
+                value: 'bachillerato',
+                groupValue: estudiosEscolaresTutoresMadre,
+                onChanged: (value) {
+                  setState(() {
+                    estudiosEscolaresTutoresMadre = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Licenciatura'),
+                value: 'licenciatura',
+                groupValue: estudiosEscolaresTutoresMadre,
+                onChanged: (value) {
+                  setState(() {
+                    estudiosEscolaresTutoresMadre = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Postgrado'),
+                value: 'postgrado',
+                groupValue: estudiosEscolaresTutoresMadre,
+                onChanged: (value) {
+                  setState(() {
+                    estudiosEscolaresTutoresMadre = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Sin estudios'),
+                value: 'sinestudios',
+                groupValue: estudiosEscolaresTutoresMadre,
+                onChanged: (value) {
+                  setState(() {
+                    estudiosEscolaresTutoresMadre = value;
+                  });
+                },
+              ),
+            ])),
+        Text("Actualmente tu:"),
+        formItemsDesign(
+            null,
+            Column(children: <Widget>[
+              Text("Padre"),
+              RadioListTile<String>(
+                title: const Text('Vive'),
+                value: 'vive',
+                groupValue: estadoTutorPadre,
+                onChanged: (value) {
+                  setState(() {
+                    estadoTutorPadre = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Finado'),
+                value: 'finado',
+                groupValue: estadoTutorPadre,
+                onChanged: (value) {
+                  setState(() {
+                    estadoTutorPadre = value;
+                  });
+                },
+              )
+            ])),
+        formItemsDesign(
+            null,
+            Column(children: <Widget>[
+              Text("Madre"),
+              RadioListTile<String>(
+                title: const Text('Vive'),
+                value: 'vive',
+                groupValue: estadoTutorMadre,
+                onChanged: (value) {
+                  setState(() {
+                    estadoTutorMadre = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Finado'),
+                value: 'finado',
+                groupValue: estadoTutorMadre,
+                onChanged: (value) {
+                  setState(() {
+                    estadoTutorMadre = value;
+                  });
+                },
+              )
+            ])),
+        Text("Nombre o lugar de trabajo de:"),
+        formItemsDesign(
+            Icons.work,
+            TextFormField(
+              controller: direccionTrabajoPadre,
+              decoration: InputDecoration(
+                labelText: 'Trabajo del padre',
+              ),
+            )),
+        formItemsDesign(
+            Icons.work,
+            TextFormField(
+              controller: direccionTrabajoMadre,
+              decoration: InputDecoration(
+                labelText: 'Trabajo de la madre',
+              ),
+            )),
+        Text("En caso de accidente avisar a:"),
+        formItemsDesign(
+            Icons.person,
+            TextFormField(
+              controller: nombreCasoAccidente,
+              decoration: InputDecoration(
+                labelText: 'Nombre',
+              ),
               validator: validateName,
             )),
-            Text(
-              "Maximo grado de estudios escolares:"
-            ),
+        formItemsDesign(
+            Icons.phone,
+            TextFormField(
+              controller: telefonoCasoAccidente,
+              decoration: InputDecoration(
+                labelText: 'Teléfono',
+              ),
+              validator: validateMobile,
+            )),
+        formItemsDesign(
+            Icons.remove_red_eye,
+            TextFormField(
+              controller: observaciones,
+              decoration: InputDecoration(
+                labelText: 'Observaciones',
+              ),
+            )),
 
-        // formItemsDesign(
-        //     Icons.remove_red_eye,
-        //     TextFormField(
-        //       controller: passwordCtrl,
-        //       obscureText: true,
-        //       decoration: InputDecoration(
-        //         labelText: 'Contraseña',
-        //       ),
-        //     )),
-        // formItemsDesign(
-        //     Icons.remove_red_eye,
-        //     TextFormField(
-        //       controller: repeatPassCtrl,
-        //       obscureText: true,
-        //       decoration: InputDecoration(
-        //         labelText: 'Repetir la Contraseña',
-        //       ),
-        //       validator: validatePassword,
-        //     )),
+        
         GestureDetector(
             onTap: () {
               save();
@@ -493,9 +707,9 @@ class _EncuestaFichaIdentificacionState
     String pattern = r'(^[a-zA-Z ]*$)';
     RegExp regExp = new RegExp(pattern);
     if (value.length == 0) {
-      return "El nombre es necesario";
+      return "El campo es necesario";
     } else if (!regExp.hasMatch(value)) {
-      return "El nombre debe de ser a-z y A-Z";
+      return "El campo debe de ser a-z y A-Z";
     }
     return null;
   }
@@ -507,6 +721,17 @@ class _EncuestaFichaIdentificacionState
       return "El telefono es necesariod";
     } else if (value.length != 10) {
       return "El numero debe tener 10 digitos";
+    }
+    return null;
+  }
+
+  String validateNumeroControl(String value) {
+    String patttern = r'(^[0-9]*$)';
+    RegExp regExp = new RegExp(patttern);
+    if (value.length == 0) {
+      return "El número de control es necesario";
+    } else if (value.length != 10) {
+      return "El número debe tener 10 digitos";
     }
     return null;
   }
