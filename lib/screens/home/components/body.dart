@@ -26,6 +26,13 @@ class Body extends StatelessWidget {
         height: 10,
       ),
       BotonFormatoEntrevista(),
+      Positioned(
+        right: 0,
+        child: Image.asset(
+          "assets/images/forma1.png",
+          width: size.width * 0.4,
+        ),
+      ),
     ]));
   }
 }
@@ -44,7 +51,7 @@ class BotonInfoGeneral extends StatelessWidget {
         children: <Widget>[
           Container(
             width: size.width * 0.8,
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(color: colorPrimary),
@@ -97,7 +104,7 @@ class BotonEstudioSocioeconomico extends StatelessWidget {
         children: <Widget>[
           Container(
             width: size.width * 0.8,
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(color: colorPrimary),
@@ -150,7 +157,7 @@ class BotonFichaIdentificacion extends StatelessWidget {
         children: <Widget>[
           Container(
             width: size.width * 0.8,
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(color: colorPrimary),
@@ -203,7 +210,7 @@ class BotonFormatoEntrevista extends StatelessWidget {
         children: <Widget>[
           Container(
             width: size.width * 0.8,
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(color: colorPrimary),
