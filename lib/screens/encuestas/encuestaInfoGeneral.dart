@@ -44,7 +44,7 @@ class _EncuestaInformacionGeneralScreenState
             margin: EdgeInsets.all(60.0),
             child: Form(
               key: keyForm,
-              child: formUI(),
+              child: formUI(context),
             ),
           ),
         ),
@@ -61,9 +61,20 @@ class _EncuestaInformacionGeneralScreenState
 
   String gender = 'hombre';
 
-  Widget formUI() {
+  Widget formUI(context) {
+    Size size = MediaQuery.of(context).size;
+
     return Column(
       children: <Widget>[
+        Text(
+          "Información general",
+          style: TextStyle(
+              fontSize: 30, fontWeight: FontWeight.bold, color: colorPrimary),
+        ),
+        Container(
+          height: size.height * 0.4,
+          child: Image.asset("assets/images/img-login.png"),
+        ),
         formItemsDesign(
             Icons.person,
             TextFormField(
@@ -72,72 +83,6 @@ class _EncuestaInformacionGeneralScreenState
                 labelText: 'Nombre',
               ),
               validator: validateName,
-            )),
-        formItemsDesign(
-            Icons.phone,
-            TextFormField(
-              controller: mobileCtrl,
-              decoration: new InputDecoration(
-                labelText: 'Numero de telefono',
-              ),
-              keyboardType: TextInputType.phone,
-              maxLength: 10,
-              validator: validateMobile,
-            )),
-        formItemsDesign(
-            null,
-            Column(children: <Widget>[
-              Text("Genero"),
-              RadioListTile<String>(
-                title: const Text('Hombre'),
-                value: 'hombre',
-                groupValue: gender,
-                onChanged: (value) {
-                  setState(() {
-                    gender = value;
-                  });
-                },
-              ),
-              RadioListTile<String>(
-                title: const Text('Mujer'),
-                value: 'mujer',
-                groupValue: gender,
-                onChanged: (value) {
-                  setState(() {
-                    gender = value;
-                  });
-                },
-              )
-            ])),
-        formItemsDesign(
-            Icons.email,
-            TextFormField(
-              controller: emailCtrl,
-              decoration: new InputDecoration(
-                labelText: 'Email',
-              ),
-              keyboardType: TextInputType.emailAddress,
-              maxLength: 32,
-              validator: validateEmail,
-            )),
-        formItemsDesign(
-            Icons.remove_red_eye,
-            TextFormField(
-              controller: passwordCtrl,
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Contraseña',
-              ),
-            )),
-        formItemsDesign(
-            Icons.remove_red_eye,
-            TextFormField(
-              controller: repeatPassCtrl,
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Repetir la Contraseña',
-              ),
-              validator: validatePassword,
             )),
         GestureDetector(
             onTap: () {

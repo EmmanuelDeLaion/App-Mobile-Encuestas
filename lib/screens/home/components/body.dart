@@ -13,15 +13,16 @@ class Body extends StatelessWidget {
     return SingleChildScrollView(
         child: Column(children: <Widget>[
       HeaderSearchTitle(size: size),
-      BotonInfoGeneral(),
-      SizedBox(
-        height: 10,
-      ),
-      BotonEstudioSocioeconomico(),
+      //este es el boton de la encuesta de informacion general
+      // BotonInfoGeneral(),
       SizedBox(
         height: 10,
       ),
       BotonFichaIdentificacion(),
+      SizedBox(
+        height: 10,
+      ),
+      BotonEstudioSocioeconomico(),
       SizedBox(
         height: 10,
       ),
@@ -179,7 +180,7 @@ class BotonFichaIdentificacion extends StatelessWidget {
                           color: colorPrimary,
                           fontWeight: FontWeight.bold)),
                   Text(
-                    "Contiene 15 preguntas",
+                    "Contiene 31 preguntas",
                     style: TextStyle(fontSize: 10, color: Colors.black54),
                   )
                 ]),
